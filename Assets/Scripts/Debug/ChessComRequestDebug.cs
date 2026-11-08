@@ -4,13 +4,13 @@ using UnityEngine;
 
 namespace Analyzer.Debugging
 {
-    public class TestSendRequest : MonoBehaviour
+    public class ChessComRequestDebug : MonoBehaviour
     {
         public async void SendRequest()
         {
             try
             {
-                Debug.Log("Request send started!");
+                Debug.Log("Chess.com request send started!");
                 
                 string[] archives = await ChessComClient.GetArchives("Evariite");
                 
