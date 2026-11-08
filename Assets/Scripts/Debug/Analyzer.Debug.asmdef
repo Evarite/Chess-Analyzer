@@ -1,0 +1,16 @@
+{
+    "name": "Analyzer.Debug",
+    "rootNamespace": "Analyzer.Debugging",
+    "references": [
+        "GUID:45f5a9b2fd5a90e419e09af0fc9fb009"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

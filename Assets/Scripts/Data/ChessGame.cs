@@ -1,19 +1,18 @@
-using UnityEngine;
+using Newtonsoft.Json;
 
 namespace Analyzer.Data
 {
-    [System.Serializable]
     public class ChessGame
     {
-        [SerializeField] private string _url;
-        [SerializeField] private string _pgn;
-        [SerializeField] private string _timeControl;
-        [SerializeField] private string _timeClass;
-        [SerializeField] private string _rules;
-        [SerializeField] private bool _rated;
-        [SerializeField] private long _endTime;
-        [SerializeField] private ChessPlayer _white;
-        [SerializeField] private ChessPlayer _black;
+        [JsonProperty("url")] private string _url;
+        [JsonProperty("pgn")] private string _pgn;
+        [JsonProperty("time_control")] private string _timeControl;
+        [JsonProperty("time_class")] private string _timeClass;
+        [JsonProperty("rules")] private string _rules;
+        [JsonProperty("rated")] private bool _rated;
+        [JsonProperty("end_time")] private long _endTime;
+        [JsonProperty("white")] private ChessPlayer _white;
+        [JsonProperty("black")] private ChessPlayer _black;
         
         public string URL => _url;
         public string Pgn => _pgn;

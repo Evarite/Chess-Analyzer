@@ -1,11 +1,10 @@
-using UnityEngine;
+using Newtonsoft.Json;
 
 namespace Analyzer.Data
 {
-    [System.Serializable]
     public class ArchivesResponse
     {
-        [SerializeField] private string[] _archives;
+        [JsonProperty("archives")] private string[] _archives;
 
         public string[] Archives => _archives;
     }

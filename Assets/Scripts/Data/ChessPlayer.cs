@@ -1,13 +1,12 @@
-using UnityEngine;
+using Newtonsoft.Json;
 
 namespace Analyzer.Data
 {
-    [System.Serializable]
     public class ChessPlayer
     {
-        [SerializeField] private string _username;
-        [SerializeField] private int _rating;
-        [SerializeField] private string _result;
+        [JsonProperty("username")] private string _username;
+        [JsonProperty("rating")] private int _rating;
+        [JsonProperty("result")] private string _result;
         
         public string Username => _username;
         public int Rating => _rating;
