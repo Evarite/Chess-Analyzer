@@ -13,6 +13,8 @@ namespace Analyzer.Data
         [JsonProperty("end_time")] private long _endTime;
         [JsonProperty("white")] private ChessPlayer _white;
         [JsonProperty("black")] private ChessPlayer _black;
+
+        [JsonProperty("source")] private string _source;
         
         public string URL => _url;
         public string Pgn => _pgn;
@@ -23,5 +25,7 @@ namespace Analyzer.Data
         public long EndTime => _endTime;
         public ChessPlayer White => _white;
         public ChessPlayer Black => _black;
+
+        public string Source { get => _source; set => _source = value; }
     }
 }

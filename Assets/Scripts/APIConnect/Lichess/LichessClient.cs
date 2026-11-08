@@ -15,6 +15,8 @@ namespace Analyzer.APIConnect.Lichess
         private const string UserAgentHeader = "User-Agent";
         private const string UserAgentValue =
             "Chess Analyzer (https://github.com/Evarite/Chess-Analyzer)";
+
+        private const string Source = "Lichess.org";
         
         public static async Awaitable<ChessGame[]> GetGames(string username, 
             int maxGames = 50)
@@ -34,6 +36,9 @@ namespace Analyzer.APIConnect.Lichess
                 lines.Select(JsonConvert.DeserializeObject<ChessGame>)
                 .Where(game => game != null).ToList();
 
+            foreach (var game in games)
+                game.Source = Source;
+            
             return games.ToArray();
         }
         

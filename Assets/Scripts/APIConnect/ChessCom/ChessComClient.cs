@@ -14,6 +14,8 @@ namespace Analyzer.APIConnect.ChessCom
         private const string RequestHeaderValue = 
             "Chess Analyzer (https://github.com/Evarite/Chess-Analyzer)";
 
+        private const string Source = "Chess.com";
+
         public static async Awaitable<string[]> GetArchives(string username)
         {
             string json =
@@ -24,7 +26,13 @@ namespace Analyzer.APIConnect.ChessCom
         public static async Awaitable<ChessGame[]> GetGames(string archiveUrl)
         {
             string json = await Get(archiveUrl);
-            return JsonConvert.DeserializeObject<GamesResponse>(json).Games;
+            
+            var games =
+                JsonConvert.DeserializeObject<GamesResponse>(json).Games;
+            foreach (var game in games)
+                game.Source = Source;
+            
+            return games;
         }
         
         private static async Awaitable<string> Get(string url)
