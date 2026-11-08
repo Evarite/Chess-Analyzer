@@ -1527,7 +1527,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d2bc090dbc770f54a90578e5d1ae0c3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Analyzer.Core::Analyzer.LichessConnect
-  _username: {fileID: 1907480760}
+  _username: {fileID: 1005271190}
   _messageField: {fileID: 845384306}
   _successColor: {r: 0, g: 1, b: 0, a: 1}
   _failColor: {r: 1, g: 0, b: 0, a: 1}
@@ -1745,7 +1745,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 250}
+  m_AnchoredPosition: {x: -560, y: -100}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1433740949
@@ -2216,7 +2216,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -560, y: 250}
+  m_AnchoredPosition: {x: -560, y: 340}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1803639298
@@ -2691,7 +2691,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e455e9a692557534689cce42900bce4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Analyzer.Core::Analyzer.ChessComConnect
-  _username: {fileID: 180235155}
+  _username: {fileID: 459061571}
   _messageField: {fileID: 1629042256}
   _successColor: {r: 0, g: 1, b: 0, a: 1}
   _failColor: {r: 1, g: 0, b: 0, a: 1}

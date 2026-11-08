@@ -16,6 +16,8 @@ namespace Analyzer.APIConnect.ChessCom
 
         private const string Source = "Chess.com";
 
+        public static event Action<ChessGame[]> OnGamesLoaded;
+        
         public static async Awaitable<string[]> GetArchives(string username)
         {
             string json =

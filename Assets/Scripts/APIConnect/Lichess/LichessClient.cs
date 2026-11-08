@@ -18,6 +18,8 @@ namespace Analyzer.APIConnect.Lichess
 
         private const string Source = "Lichess.org";
         
+        public static event Action<ChessGame[]> OnGamesLoaded;
+        
         public static async Awaitable<ChessGame[]> GetGames(string username, 
             int maxGames = 50)
         {
