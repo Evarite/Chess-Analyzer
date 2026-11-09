@@ -2,7 +2,9 @@
     "name": "Analyzer.Debug",
     "rootNamespace": "Analyzer.Debugging",
     "references": [
-        "GUID:45f5a9b2fd5a90e419e09af0fc9fb009"
+        "GUID:45f5a9b2fd5a90e419e09af0fc9fb009",
+        "GUID:f51ebe6a0ceec4240a699833d6309b23",
+        "GUID:b0214a6008ed146ff8f122a6a9c2f6cc"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

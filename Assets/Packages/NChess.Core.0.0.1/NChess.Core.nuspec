@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+  <metadata>
+    <id>NChess.Core</id>
+    <version>0.0.1</version>
+    <authors>NChess.Core</authors>
+    <description>Package Description</description>
+    <repository type="git" commit="98695f79870fa9c97316f8b29ad88729d93a6af9" />
+    <dependencies>
+      <group targetFramework=".NETStandard2.1" />
+    </dependencies>
+  </metadata>
+</package>

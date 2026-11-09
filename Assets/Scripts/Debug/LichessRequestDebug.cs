@@ -18,7 +18,7 @@ namespace Analyzer.Debugging
                 Debug.Log("Lichess games received!");
                 
                 foreach(var game in games)
-                    Debug.Log(game.Pgn);
+                    Debug.Log(game);
             }
             catch (Exception e)
             {

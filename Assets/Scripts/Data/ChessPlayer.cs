@@ -1,15 +1,23 @@
-using Newtonsoft.Json;
+using Analyzer.APIConnect.ChessCom.DTO;
+using Analyzer.APIConnect.Lichess.DTO;
 
 namespace Analyzer.Data
 {
     public class ChessPlayer
     {
-        [JsonProperty("username")] private string _username;
-        [JsonProperty("rating")] private int _rating;
-        [JsonProperty("result")] private string _result;
+        private ChessPlayer(string username, int rating)
+        {
+            Username = username;
+            Rating = rating;
+        }
         
-        public string Username => _username;
-        public int Rating => _rating;
-        public string Result => _result;
+        public string Username { get; }
+        public int Rating { get; }
+
+        public static ChessPlayer FromChessCom(ChessComPlayer player) =>
+            new(player.Username, player.Rating);
+
+        public static ChessPlayer FromLichess(LichessPlayer player) => 
+            new(player.User.Name, player.Rating);
     }
 }

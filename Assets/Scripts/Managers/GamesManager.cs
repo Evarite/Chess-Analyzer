@@ -4,6 +4,7 @@ using Analyzer.APIConnect.ChessCom;
 using Analyzer.APIConnect.Lichess;
 using Analyzer.Data;
 using JetBrains.Annotations;
+using UnityEngine;
 using VContainer.Unity;
 
 namespace Analyzer.Managers
@@ -11,7 +12,9 @@ namespace Analyzer.Managers
     [UsedImplicitly]
     public class GamesManager : IInitializable, IDisposable
     {
-        public Dictionary<string, ChessGame> Games { get; } = new();
+        private Dictionary<string, ChessGame> _games = new();
+
+        public IReadOnlyDictionary<string, ChessGame> Games => _games;
 
         public void Initialize()
         {
@@ -28,7 +31,7 @@ namespace Analyzer.Managers
         private void AddGames(ChessGame[] games)
         {
             foreach (var game in games)
-                Games.TryAdd(game.URL, game);
+                _games.TryAdd(game.URL, game);
         }
     }
 }

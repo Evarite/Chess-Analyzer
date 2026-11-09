@@ -1,8 +1,9 @@
 using System;
+using System.Linq;
 using Analyzer.Data;
 using Newtonsoft.Json;
-using UnityEngine;
 using UnityEngine.Networking;
+using Cysharp.Threading.Tasks;
 
 namespace Analyzer.APIConnect.ChessCom
 {
@@ -14,30 +15,31 @@ namespace Analyzer.APIConnect.ChessCom
         private const string RequestHeaderValue = 
             "Chess Analyzer (https://github.com/Evarite/Chess-Analyzer)";
 
-        private const string Source = "Chess.com";
-
         public static event Action<ChessGame[]> OnGamesLoaded;
         
-        public static async Awaitable<string[]> GetArchives(string username)
+        public static async UniTask<string[]> GetArchives(string username)
         {
             string json =
                 await Get($"{BaseUrl}{username.ToLowerInvariant()}{UrLDescription}");
             return JsonConvert.DeserializeObject<ArchivesResponse>(json).Archives;
         }
 
-        public static async Awaitable<ChessGame[]> GetGames(string archiveUrl)
+        public static async UniTask<ChessGame[]> GetGames(string archiveUrl)
         {
             string json = await Get(archiveUrl);
             
-            var games =
+            var chessComGames =
                 JsonConvert.DeserializeObject<GamesResponse>(json).Games;
-            foreach (var game in games)
-                game.Source = Source;
+
+            var games = chessComGames.Select(ChessGame.FromChessCom)
+                .ToArray();
+            
+            OnGamesLoaded?.Invoke(games);
             
             return games;
         }
         
-        private static async Awaitable<string> Get(string url)
+        private static async UniTask<string> Get(string url)
         {
             using var request = UnityWebRequest.Get(url);
             request.SetRequestHeader(RequestHeaderName, RequestHeaderValue);

@@ -1,9 +1,11 @@
 using System;
 using System.Linq;
+using Analyzer.APIConnect.Lichess.DTO;
 using Analyzer.Data;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.Networking;
+using Cysharp.Threading.Tasks;
 
 namespace Analyzer.APIConnect.Lichess
 {
@@ -20,31 +22,35 @@ namespace Analyzer.APIConnect.Lichess
         
         public static event Action<ChessGame[]> OnGamesLoaded;
         
-        public static async Awaitable<ChessGame[]> GetGames(string username, 
+        public static async UniTask<ChessGame[]> GetGames(string username, 
             int maxGames = 50)
         {
             string url = $"{BaseUrl}{username}?max={maxGames}&pgnInJson=true";
             string rawNdjson = await Get(url);
 
-            return ParseNdjson(rawNdjson);
+            var lichessGames = ParseNdjson(rawNdjson);
+            
+            var games =
+                lichessGames.Select(ChessGame.FromLichess).ToArray();
+            
+            OnGamesLoaded?.Invoke(games);
+            
+            return games;
         }
         
-        private static ChessGame[] ParseNdjson(string ndjson)
+        private static LichessGame[] ParseNdjson(string ndjson)
         {
             string[] lines = ndjson.Split(new[] { '\n', '\r' },
                 StringSplitOptions.RemoveEmptyEntries);
 
             var games = 
-                lines.Select(JsonConvert.DeserializeObject<ChessGame>)
+                lines.Select(JsonConvert.DeserializeObject<LichessGame>)
                 .Where(game => game != null).ToList();
-
-            foreach (var game in games)
-                game.Source = Source;
             
             return games.ToArray();
         }
         
-        private static async Awaitable<string> Get(string url)
+        private static async UniTask<string> Get(string url)
         {
             using var request = UnityWebRequest.Get(url);
             

@@ -21,7 +21,7 @@ namespace Analyzer.Debugging
                 Debug.Log("Received games!");
                 
                 foreach (var game in games)
-                    Debug.Log(game.Pgn);
+                    Debug.Log(game);
             }
             catch (Exception e)
             {
