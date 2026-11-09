@@ -20,7 +20,7 @@ namespace Analyzer
             try
             {
                 string[] archives = await ChessComClient.GetArchives(_username.text);
-                var games = await ChessComClient.GetGames(archives[0]);
+                var games = await ChessComClient.GetGames(archives[^1]);
 
                 _messageField.color = _successColor;
                 _messageField.text = $"Success! {games.Length} games retrieved!";
@@ -29,6 +29,8 @@ namespace Analyzer
             {
                 _messageField.color = _failColor;
                 _messageField.text = $"Couldn't connect: {e.Message}";
+                
+                Debug.LogException(e);
             }
         }
     }

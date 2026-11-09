@@ -1,6 +1,10 @@
 using System.Collections.Generic;
 using System.Linq;
+using Analyzer.Data;
 using NChess;
+using NChess.Core.Common;
+using NChess.Core.Moves;
+using NChess.Core.Pieces;
 using Newtonsoft.Json;
 
 namespace Analyzer.APIConnect.ChessCom.DTO
@@ -28,16 +32,6 @@ namespace Analyzer.APIConnect.ChessCom.DTO
         public ChessComPlayer White => _white;
         public ChessComPlayer Black => _black;
 
-        public List<string> Uci
-        {
-            get
-            {
-                var chess = new Chess();
-                
-                chess.ImportPgn(_pgn);
-                
-                return chess.History().Select(move => move.Move.ToString()).ToList();
-            }
-        }
+        public List<string> Uci => UciConverter.FromPgn(_pgn);
     }
 }

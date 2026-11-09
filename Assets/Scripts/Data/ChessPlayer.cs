@@ -18,6 +18,6 @@ namespace Analyzer.Data
             new(player.Username, player.Rating);
 
         public static ChessPlayer FromLichess(LichessPlayer player) => 
-            new(player.User.Name, player.Rating);
+            new(player.User?.Name ?? "AI / Anonymous", player.Rating);
     }
 }

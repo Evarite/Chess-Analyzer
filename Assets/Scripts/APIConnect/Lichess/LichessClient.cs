@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using Analyzer.APIConnect.Lichess.DTO;
 using Analyzer.Data;
@@ -25,17 +26,29 @@ namespace Analyzer.APIConnect.Lichess
         public static async UniTask<ChessGame[]> GetGames(string username, 
             int maxGames = 50)
         {
-            string url = $"{BaseUrl}{username}?max={maxGames}&pgnInJson=true";
+            string url = $"{BaseUrl}{username}?max={maxGames}&pgnInJson=true&lastFen=true";
             string rawNdjson = await Get(url);
 
             var lichessGames = ParseNdjson(rawNdjson);
             
-            var games =
-                lichessGames.Select(ChessGame.FromLichess).ToArray();
-            
-            OnGamesLoaded?.Invoke(games);
-            
-            return games;
+            var games = new List<ChessGame>();
+
+            foreach (var g in lichessGames
+                         .Where(g => g.Variant == "standard"))
+            {
+                try
+                {
+                    games.Add(ChessGame.FromLichess(g));
+                }
+                catch (Exception e)
+                {
+                    Debug.LogWarning($"Skipped {g.URL}: {e.Message}");
+                }
+            }
+
+            var result = games.ToArray();
+            OnGamesLoaded?.Invoke(result);
+            return result;
         }
         
         private static LichessGame[] ParseNdjson(string ndjson)

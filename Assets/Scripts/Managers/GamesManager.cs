@@ -4,7 +4,6 @@ using Analyzer.APIConnect.ChessCom;
 using Analyzer.APIConnect.Lichess;
 using Analyzer.Data;
 using JetBrains.Annotations;
-using UnityEngine;
 using VContainer.Unity;
 
 namespace Analyzer.Managers

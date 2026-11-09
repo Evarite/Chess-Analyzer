@@ -1,5 +1,7 @@
+using System;
 using System.Collections.Generic;
 using System.Linq;
+using Analyzer.Data;
 using NChess;
 using Newtonsoft.Json;
 
@@ -17,6 +19,7 @@ namespace Analyzer.APIConnect.Lichess.DTO
         [JsonProperty("players")] private LichessPlayers _players;
         [JsonProperty("winner")] private string _winner; 
         [JsonProperty("status")] private string _status;
+        [JsonProperty("lastFen")] private string _lastFen;
         
         public LichessClock Clock => _clock;
         public string Speed => _speed;
@@ -26,21 +29,26 @@ namespace Analyzer.APIConnect.Lichess.DTO
         public LichessPlayers Players => _players;
         public string Winner => _winner;
         public string Status => _status;
+        public string Fen => _lastFen;
 
         public string URL => $"https://lichess.org/{_id}";
-        public List<string> Uci => _moves.Split(" ").ToList();
-        public string Fen
+        public List<string> Uci
         {
             get
             {
-                var chess = new Chess();
-                
-                foreach (string uciMove in Uci
-                             .Where(uciMove 
-                                 => !string.IsNullOrWhiteSpace(uciMove)))
-                    chess.TryMoveUci(uciMove);
+                if (string.IsNullOrWhiteSpace(_moves))
+                    return new();
 
-                return chess.Fen;
+                string[] san = _moves.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+                var sb = new System.Text.StringBuilder();
+
+                for (int i = 0; i < san.Length; i++)
+                {
+                    if (i % 2 == 0) sb.Append($"{i / 2 + 1}. ");
+                    sb.Append(san[i]).Append(' ');
+                }
+
+                return UciConverter.FromPgn(sb.ToString());
             }
         }
     }

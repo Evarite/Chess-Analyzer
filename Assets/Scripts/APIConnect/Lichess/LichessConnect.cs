@@ -28,6 +28,8 @@ namespace Analyzer
             {
                 _messageField.color = _failColor;
                 _messageField.text = $"Couldn't connect: {e.Message}";
+                
+                Debug.LogException(e);
             }
         }
     }
